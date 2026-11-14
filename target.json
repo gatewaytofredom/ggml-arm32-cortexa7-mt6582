@@ -1,0 +1,59 @@
+{
+  "name": "ggml-arm32-cortexa7-mt6582",
+  "naming_schema": "ggml-<arch>-<uarch>-<sku>",
+  "target_cpu": "MediaTek MT6582 (2x ARM Cortex-A7 active)",
+  "microarchitecture": "ARM Cortex-A7 r0p3 (ARMv7-A, 8-stage in-order)",
+  "arch": "arm32",
+  "cpuid": {
+    "implementer": "0x41 (ARM)",
+    "part": "0xc07 (Cortex-A7)",
+    "revision": "r0p3",
+    "required_features": ["neon", "vfpv4", "thumb", "idiva", "idivt"],
+    "forbidden_features": ["aarch64", "asimddp", "i8mm"]
+  },
+  "topology": {
+    "cores_present": 2,
+    "threads": 2,
+    "ram_mb": 512,
+    "memory_bandwidth_measured": {
+      "single_core_dram_gbps": 1.95,
+      "dual_core_dram_pld_gbps": 3.39,
+      "l1_neon_gbps": 9.38,
+      "l2_neon_gbps": 4.12
+    },
+    "clocks_mhz": {
+      "idle": 598,
+      "boost": 1300
+    }
+  },
+  "upstream": {
+    "repo": "https://github.com/ggml-org/llama.cpp.git",
+    "commit": "3ba1ce0e28d991800e1585b7d3533f77213939d6",
+    "patch": "patches/llama.cpp-3ba1ce0.patch"
+  },
+  "compiler": {
+    "toolchain": "Android NDK Clang (armeabi-v7a, android-21, static ELF)",
+    "required_flags": [
+      "-march=armv7-a",
+      "-mfpu=neon-vfpv4",
+      "-mfloat-abi=softfp",
+      "-mcpu=cortex-a7",
+      "-marm",
+      "-fomit-frame-pointer",
+      "-fno-stack-protector"
+    ]
+  },
+  "runtime": {
+    "boost_cmd": "service call mtk-perfservice 3 i32 5 i32 120000",
+    "server_flags": ["-t", "2", "--poll", "0", "-lm", "mmap"]
+  },
+  "benchmarks": [
+    {
+      "model": "Qwen3-0.6B-UD-IQ2_XXS (217.55 MiB)",
+      "upstream_pp16_tps": 1.79,
+      "upstream_tg8_tps": 1.24,
+      "optimized_pp16_tps": 2.21,
+      "optimized_tg8_tps": 1.50
+    }
+  ]
+}
