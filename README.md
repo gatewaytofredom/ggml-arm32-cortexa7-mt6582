@@ -1,8 +1,11 @@
 # ggml-arm32-cortexa7-mt6582
 
+[![Discord](https://img.shields.io/badge/Discord-Gateway's%20Experiments-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/pD8wR8YVhZ)
+
 Hand-tuned 32-bit **ARMv7-A NEON + VFPv4** `ggml-cpu` and `llama.cpp` inference kernels for the **MediaTek MT6582** (2x active ARM Cortex-A7 @ 1.30 GHz, 512 MB RAM, Android 4.4.2+).
 
 > Primarily an AI-completed project. Contributors: `gateway` (`gateway@laindex.net`), Gemini 4 Hydrogen.
+> Hardware requests, `llama-bench` traces & kernel talk: [Gateway's Experiments Discord](https://discord.gg/pD8wR8YVhZ).
 
 Up to **+23.5% prompt processing** (`pp16`) and **+21.0% decode throughput** (`tg8`) over upstream `llama.cpp` (`3ba1ce0`) on a 2014 dual-core Alcatel Pixi3 while matching reference dot-product output.
 
